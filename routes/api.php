@@ -29,7 +29,7 @@ Route::post('province/district', [
     'uses' => 'PopulationController@provinceDistrict',
     'as' => 'api.provinceDistrict'
 ]);
-Route::post('vote/registration/check/{nid}', [
+Route::post('vote/registration/check', [
     'uses' => 'PopulationController@checkNida',
     'as' => 'api.checkNida'
 ]);

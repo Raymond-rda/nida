@@ -60,8 +60,8 @@ class PopulationController extends Controller
         return response()->json(['district' => $dist], 200);
     }
 
-    public function checkNida($nid){
-        $people=Population::where('nid','=',$nid)->first();
+    public function checkNida(Request $request){
+        $people=Population::where('nid','=',$request['nid'])->first();
         if ($people) {
             return response()->json(['data' => $people], 200);
         }else{
