@@ -30,12 +30,11 @@ class PopulationController extends Controller
             'district' => ['required'],
             'biometric' => ['required', 'string', 'max:500', 'unique:populations'],
 
-        ],
-        ['phone.unique'=>"Phone must be unique"]
-        );
+        ]);
         if ($validator->fails()) {
             return response()->json(['response'=>'fail','data'=>$validator->messages()], 400);
         }
+        return response()->json(['response' => $request->all()], 200);
         $pop=new Population();
         $pop->province_id=$request['province'];
         $pop->district_id=$request['district'];
@@ -61,4 +60,12 @@ class PopulationController extends Controller
         return response()->json(['district' => $dist], 200);
     }
 
+    public function checkNida($nid){
+        $people=Population::where('nid','=',$nid)->first();
+        if ($people) {
+            return response()->json(['data' => $people], 200);
+        }else{
+            return response()->json(['data' => []], 404);
+        }
+    }
 }

@@ -29,6 +29,11 @@ Route::post('province/district/{id}', [
     'uses' => 'PopulationController@provinceDistrict',
     'as' => 'api.provinceDistrict'
 ]);
+Route::post('vote/registration/check/{nid}', [
+    'uses' => 'PopulationController@checkNida',
+    'as' => 'api.checkNida'
+]);
+
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
