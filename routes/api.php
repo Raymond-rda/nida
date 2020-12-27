@@ -25,7 +25,7 @@ Route::post('get/province', [
     'uses' => 'PopulationController@getDistrict',
     'as' => 'api.getDistrict'
 ]);
-Route::post('province/district/{id}', [
+Route::post('province/district', [
     'uses' => 'PopulationController@provinceDistrict',
     'as' => 'api.provinceDistrict'
 ]);

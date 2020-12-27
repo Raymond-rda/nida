@@ -55,8 +55,8 @@ class PopulationController extends Controller
         $dist=District::all();
         return response()->json(['district' => $dist], 200);
     }
-    public function provinceDistrict($dist){
-        $dist=District::where('province_id','=',$dist)->get();
+    public function provinceDistrict(Request $request){
+        $dist=District::where('province_id','=',$$request['id'])->get();
         return response()->json(['district' => $dist], 200);
     }
 
