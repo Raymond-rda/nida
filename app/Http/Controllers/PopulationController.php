@@ -34,7 +34,7 @@ class PopulationController extends Controller
         if ($validator->fails()) {
             return response()->json(['response'=>'fail','data'=>$validator->messages()], 400);
         }
-        return response()->json(['response' => $request->all()], 200);
+//        return response()->json(['response' => $request->all()], 200);
         $pop=new Population();
         $pop->province_id=$request['province'];
         $pop->district_id=$request['district'];
@@ -45,7 +45,7 @@ class PopulationController extends Controller
         $pop->sex=$request['sex'];
         $pop->biometric=$request['biometric'];
         $pop->save();
-        return response()->json(['response' => 'ok'], 200);
+        return response()->json(['response' => 'ok','data'=>$pop], 200);
     }
     public function getProvince(){
         $prov=Province::all();
