@@ -35,17 +35,42 @@ class PopulationController extends Controller
             return response()->json(['response'=>'fail','data'=>$validator->messages()], 400);
         }
 //        return response()->json(['response' => $request->all()], 200);
+        $vote=mt_rand(110000000, 999999999);
         $pop=new Population();
         $pop->province_id=$request['province'];
         $pop->district_id=$request['district'];
         $pop->nid=$request['nid'];
+        $pop->vote_id=$vote;
         $pop->name=$request['name'];
         $pop->phone=$request['phone'];
         $pop->dob=$request['dob'];
         $pop->sex=$request['sex'];
         $pop->biometric=$request['biometric'];
         $pop->save();
-        return response()->json(['response' => 'ok','data'=>$pop], 200);
+
+                $data = array(
+                    "sender"=>'+250788866742',
+                    "recipients"=>"25".$pop->phone,
+                    "message"=>"Your voting ID is  ".$pop->vote_id
+                ,);
+                $url = "https://www.intouchsms.co.rw/api/sendsms/.json";
+                $data = http_build_query($data);
+                $username="tuyandre20";
+                $password="kamana1234567";
+                $ch = curl_init();
+                curl_setopt($ch,CURLOPT_URL, $url);
+                curl_setopt($ch, CURLOPT_USERPWD, $username . ":" . $password);
+                curl_setopt($ch,CURLOPT_POST,true);
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER,1);
+                curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+                curl_setopt($ch,CURLOPT_POSTFIELDS, $data);
+                $result = curl_exec($ch);
+                $httpcode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+                curl_close($ch);
+                if ($result) {
+                    return response()->json(['response' => 'ok','data'=>$pop], 200);
+                }
+        return response()->json(['response' => 'sms','data'=>$pop], 200);
     }
     public function getProvince(){
         $prov=Province::all();

@@ -8,7 +8,7 @@ class Population extends Model
 {
     protected $table = 'populations';
     protected $fillable = [
-        'province_id','district_id','name','biometric','nid','sex','dob','phone','profile'
+        'province_id','district_id','name','biometric','nid','sex','dob','phone','profile','vote_id'
     ];
     public function Province()
     {

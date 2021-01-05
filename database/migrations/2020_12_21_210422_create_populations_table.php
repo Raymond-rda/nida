@@ -17,6 +17,7 @@ class CreatePopulationsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('province_id')->nullable();
             $table->unsignedBigInteger('district_id')->nullable();
+            $table->bigInteger('vote_id')->unique();
             $table->string('name');
             $table->string('phone')->unique()->nullable();
             $table->string('profile')->nullable();
