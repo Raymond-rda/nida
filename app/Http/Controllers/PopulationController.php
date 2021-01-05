@@ -49,14 +49,14 @@ class PopulationController extends Controller
         $pop->save();
 
                 $data = array(
-                    "sender"=>'+250788866742',
+                    "sender"=>'+250789811014',
                     "recipients"=>"25".$pop->phone,
                     "message"=>"Your voting ID is  ".$pop->vote_id
                 ,);
                 $url = "https://www.intouchsms.co.rw/api/sendsms/.json";
                 $data = http_build_query($data);
-                $username="tuyandre20";
-                $password="kamana1234567";
+                $username="Raymond";
+                $password="amajyepfo";
                 $ch = curl_init();
                 curl_setopt($ch,CURLOPT_URL, $url);
                 curl_setopt($ch, CURLOPT_USERPWD, $username . ":" . $password);
